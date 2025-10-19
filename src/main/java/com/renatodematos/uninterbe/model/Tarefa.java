@@ -1,6 +1,8 @@
 package com.renatodematos.uninterbe.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import java.time.LocalDate;
 
 @Entity
@@ -12,12 +14,15 @@ public class Tarefa {
     private Long id;
     
     @Column(nullable = false)
+    @NotBlank(message = "Nome é obrigatório")
     private String nome;
     
     @Column(nullable = false)
+    @NotNull(message = "Data de entrega é obrigatória")
     private LocalDate dataEntrega;
     
     @Column(nullable = false)
+    @NotBlank(message = "Responsável é obrigatório")
     private String responsavel;
     
     // Construtor vazio

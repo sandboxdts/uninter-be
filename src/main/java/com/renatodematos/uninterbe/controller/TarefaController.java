@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import com.renatodematos.uninterbe.model.Tarefa;
 import com.renatodematos.uninterbe.repository.TarefaRepository;
 
+import jakarta.validation.Valid;
 import java.util.List;
 import java.util.Optional;
 
@@ -21,7 +22,7 @@ public class TarefaController {
     
     // POST /tarefas - Criar nova tarefa
     @PostMapping
-    public ResponseEntity<Tarefa> criarTarefa(@RequestBody Tarefa tarefa) {
+    public ResponseEntity<Tarefa> criarTarefa(@Valid @RequestBody Tarefa tarefa) {
         Tarefa tarefaSalva = tarefaRepository.save(tarefa);
         return ResponseEntity.status(HttpStatus.CREATED).body(tarefaSalva);
     }
@@ -47,7 +48,7 @@ public class TarefaController {
     
     // PUT /tarefas/{id} - Atualizar tarefa existente
     @PutMapping("/{id}")
-    public ResponseEntity<Tarefa> atualizarTarefa(@PathVariable("id") Long id, @RequestBody Tarefa tarefaAtualizada) {
+    public ResponseEntity<Tarefa> atualizarTarefa(@PathVariable("id") Long id, @Valid @RequestBody Tarefa tarefaAtualizada) {
         Optional<Tarefa> tarefaExistente = tarefaRepository.findById(id);
         
         if (tarefaExistente.isPresent()) {
